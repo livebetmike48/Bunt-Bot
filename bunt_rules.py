@@ -17,6 +17,7 @@ def is_bunt_situation(half: str, inning: int, outs: int, second_occupied: bool,
         return False
     if not second_occupied:
         return False
-    if batting_score > fielding_score:
-        return False  # batting team is winning -- no bunt alert
+    margin = fielding_score - batting_score
+    if margin < 0 or margin > 1:
+        return False  # only tied (0) or down by exactly 1 -- not winning, not a blowout
     return True
